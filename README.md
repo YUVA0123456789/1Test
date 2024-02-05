@@ -1,4 +1,3 @@
-Page # 1
 ASSEMBLY LANGUAGE PROGRAMS USING 8086 MP
 
 1. Arithmetic operations on Hex and BCD numbers
