@@ -1,10 +1,9 @@
-####6th Code
-
+#### 6th CODE
 /*A Call centre phone system has to hold the phone calls from customers and provide service based on the arrival time of the calls. Design and implement a C program to simulate this system using a Circular queue. Program should have options to add and remove the phone calls in appropriate order for their service. (Array Implementation of Queue with maximum size MAX). Include C functions to perform the following operations.
 a.	Add a call
 b.	Delete a call 
 c.	Display the current status of  calls 
-Demonstrate Overflow and Underflow conditions .*/
+Demonstrate Overflow and Underflow conditions*/ .
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -109,12 +108,8 @@ int main() {
 }
 
 
-
-
-
- #### 7th CODE
-
- /*A music club is interested in creating a song playlist. The facilities to be provided for the users of the playlist are 
+##7-----------
+/*A music club is interested in creating a song playlist. The facilities to be provided for the users of the playlist are 
 a.	Create a playlist
 b.	Play a song from starting of the playlist.
 c.	Play a song from end of the playlist 
@@ -127,7 +122,6 @@ Design and Implement a menu driven Program in C for the above operations using S
 #include<stdio.h>
 #include<stdlib.h>
 #include<string.h>
-
 struct node
 {
   char song[25];
@@ -137,6 +131,7 @@ struct node
 typedef struct node *NODEPTR;
 NODEPTR list=NULL;
 
+
 /*getnode()*/
 NODEPTR getnode()
 {
@@ -145,12 +140,14 @@ NODEPTR getnode()
   if(r==NULL)
   {
     printf("Allocation failed\n");
-    return NULL;
+    return;
   }
   return r;
 }
 
+
 //create a list
+
 NODEPTR create(NODEPTR list, char song[])
 {
 	NODEPTR p,q;
@@ -246,7 +243,7 @@ void display(NODEPTR list)
     }
 }
 
-int main()
+main()
 {
     int choice;
     char cont;
@@ -288,16 +285,11 @@ int main()
 
    }
 }while(choice!=7);
-   return 0; // Add a return statement at the end of main
 }
 
 
-
-
-
-#### 8th CODE
-
-You are assigned the task to design a browser history where a person can visit any page and go backward or forward in browser history in any number of steps. Suppose we have to go forward x steps, but we can go only y(where y<x) steps forward because of the last Node, then we return the last node. Similarly, we will return the first node while traveling back.
+##8----
+ You are assigned the task to design a browser history where a person can visit any page and go backward or forward in browser history in any number of steps. Suppose we have to go forward x steps, but we can go only y(where y<x) steps forward because of the last Node, then we return the last node. Similarly, we will return the first node while traveling back.
 
 Design and implement a menu driven Program in C to implement the above operations using Doubly Linked List.
 
@@ -305,15 +297,18 @@ Design and implement a menu driven Program in C to implement the above operation
 #include<stdio.h>
 #include<stdlib.h>
 
+
 struct node
 {
-    int page;
-    struct node *left;
-    struct node *right;
+int page;
+struct node *left;
+struct node *right;
 };
+
 
 typedef struct node *NODEPTR;
 NODEPTR list=NULL;
+
 
 NODEPTR createlist(NODEPTR list,int page);
 NODEPTR moveforward(NODEPTR list, int cp ,int steps);
@@ -323,150 +318,146 @@ NODEPTR getnode();
 
 NODEPTR createlist(NODEPTR list, int page)
 {
-    NODEPTR p,q;
-    p=getnode();
-    p->page=page;
-    p->left=NULL;
-    p->right=NULL;
-    if(list==NULL)
-        list=p;
-    else{
-        for(q=list; q->right!=NULL; q=q->right)
-            ;
-        q->right=p;
-        p->left=q;
-    }
-    return(list);
+	NODEPTR p,q;
+	p=getnode();
+	p->page=page;
+	p->left=NULL;
+	p->right=NULL;
+	if(list==NULL)
+		list=p;
+	else{
+		for(q=list; q->right!=NULL; q=q->right)
+		;
+		q->right=p;
+		p->left=q;
+
+	}
+	return(list);
 }
 
+	
 NODEPTR moveforward(NODEPTR list, int cp,int steps)
 {
-    NODEPTR p,q;
-    int count=0,s;
-    if(list==NULL)
-        printf("\n Empty list");
-    else{
-        p=list;
-        for(p=list,count=0;count<cp-1; count++)
-            p=p->right;
-        for(q=p,s=0;s<steps;s++)
-        {
-            if(q->right==NULL)
-                return q;
-            q=q->right;
-        }
-        return q;
-    }
+	NODEPTR p,q;
+ 	int count=0,s;
+	if(list==NULL)
+		printf("\n Empty list");
+	else{
+		p=list;
+                for(p=list,count=0;count<cp-1; count++)
+                  p=p->right;
+             
+                for(q=p,s=0;s<steps;s++)
+                 {
+                    if(q->right==NULL)
+		    	return(q);
+		    q=q->right;
+ 		   }
+                 return(q);
+}
 }
 
 NODEPTR movebackward(NODEPTR list, int cp,int steps)
 {
-    NODEPTR p,q;
-    int count=0,s;
-    if(list==NULL)
-        printf("\n Empty list");
-    else{
-        p=list;
-        for(p=list,count=0;count<cp-1; count++)
-            p=p->right;
-        for(q=p,s=0;s<steps;s++)
-        {
-            if(q->left==NULL)
-                return q;
-            q=q->left;
-        }
-        return q;
+	NODEPTR p,q;
+ 	int count=0,s;
+	if(list==NULL)
+		printf("\n Empty list");
+	else{
+		p=list;
+                for(p=list,count=0;count<cp-1; count++)
+                  p=p->right;
+             
+                for(q=p,s=0;s<steps;s++)
+                 {
+                    if(q->left==NULL)
+		            	return(q);
+		           q=q->left;
+ 		   }
+                 return(q);
     }
 }
 
+
 void display(NODEPTR list)
 {
-    NODEPTR p;
-    p=list;
-    if(p==NULL)
-        printf("\nEmpty list");
-    else
-    {
-        printf("\nThe page list contains: ");
-        for(p=list;p!=NULL;p=p->right) 
-        {
-            printf("%d<->",p->page);
-        }
-    }
+	NODEPTR p;
+	p=list;
+	if(p==NULL)
+		printf("\nEmpty list");
+	else
+	{
+		printf("\n The page list contains: ");
+		for(p=list;p!=NULL;p=p->right) 
+		{
+			printf("%d<->",p->page);
+		}
+	}
 }
 
 NODEPTR getnode()
 {
-    NODEPTR r;
-    r=(NODEPTR)malloc(sizeof(struct node));
-    if(r==NULL)
-    {
-        printf("\n Node allocation failed");
-        exit(0);
-    }
-    return(r);
+	NODEPTR r;
+	r=(NODEPTR)malloc(sizeof(struct node));
+	if(r==NULL)
+	{
+		printf("\n Node allocation failed");
+		exit(0);
+	}
+	return(r);
 }
 
-int main()
+
+void main()
 {
-    int page,choice,steps,cp;
-    char cont;
-    NODEPTR p;
-    do{
-        printf("\n ...........MENU...........");
-        printf("\n 1->CREATE LIST\t  2->MOVE FORWARD\t  3->MOVE BACKWARD\t 4->DISPLAY 5->EXIT");
-        printf("\n Enter your choice");
-        scanf("%d",&choice);
-        switch(choice)
-        {
-        case 1:
-            printf("\n CREATION OF DOUBLY LINKED LIST OF PAGES IS IN PROGRESS:\n");
-            do{
-                printf("Enter a page number:");
-                scanf("%d",&page);
-                list = createlist(list,page);
-                printf("Do you want to enter another page[Y/N]:");
-                scanf(" %c",&cont);
-            } while(cont=='Y' || cont=='y');
-            display(list);
-            break;
-        case 2:
-            printf("\n MOVE FORWARD:\n");
-            printf("\nEnter the current page:");
-            scanf("%d",&cp);
-            printf("Enter the number of steps to move forward");
-            scanf("%d",&steps);
-            p=moveforward(list,cp,steps);
-            printf("\n Moved forward to  page %d from %dth page",p->page, cp);
-            break;
-        case 3:
-            printf("\n MOVE BACKWARD:\n");
-            printf("\nEnter the current page:");
-            scanf("%d",&cp);
-            printf("Enter the number of steps to move backward");
-            scanf("%d",&steps);
-            p=movebackward(list,cp,steps);
-            printf("\n Moved backwards to  page %d from %dth page",p->page, cp);
-            break;
-        case 4:
-            display(list);
-            break;
-        case 5:
-            printf("\n Quitting operation List.....\n");
-            break;
-        default:
-            printf("\n Invalid choice");
-            break;
-        }		
-    } while(choice!=5);
-    return 0;
+		int page,choice,steps,cp;
+ 		char cont;
+		NODEPTR p;
+		do{
+		printf("\n ...........MENU...........");
+		printf("\n 1->CREATE LIST\t  2->MOVE FORWARD\t  3->MOVE BACKWARD\t 4->DISPLAY 5->EXIT");
+		printf("\n Enter your choice");
+		scanf("%d",&choice);
+		switch(choice)
+		{
+		case 1:printf("\n CREATION OF DOUBLY LINKED LIST OF PAGES IS IN PROGRESS:\n");
+			do{
+              	        	  printf("Enter a page number:");
+                        	  scanf("%d",&page);
+              	 	 	  list = createlist(list,page);
+              	 		  printf("Do you want to enter another page[Y/N]:");
+               	 		  scanf(" %c",&cont);
+              		 }while(cont=='Y' || cont=='y');
+               		  display(list); 
+			  break;
+		 	
+		case 2: printf("\n MOVE FORWARD:\n");
+			printf("\nEnter the current page:");
+                        scanf("%d",&cp);
+			printf("Enter the number of steps to move forward");
+			scanf("%d",&steps);
+			p=moveforward(list,cp,steps);
+			printf("\n Moved forward to  page %d from %dth page",p->page, cp);
+			break;
+		case 3: printf("\n MOVE BACKWARD:\n");
+			printf("\nEnter the current page:");
+                        scanf("%d",&cp);
+			printf("Enter the number of steps to move backward");
+			scanf("%d",&steps);
+			p=movebackward(list,cp,steps);
+			printf("\n Moved backwards to  page %d from %dth page",p->page, cp);
+			break;
+		case 4: display(list);
+		        break;
+		case 5:printf("\n Quitting operation List.....\n");
+			break;
+		default:printf("\n Invalid choice");
+			break;
+		}		
+	}while(choice!=5);
 }
 
-
-
-
-
-#### 9th CODE
+ ##9---
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -573,14 +564,14 @@ void main()
 
   while(1)
   {
-        printf("\n~Menu~");
+        printf("\n~~Menu~~");
         printf("\n1.Represent and Evaluate a Polynomial P(x,y,z)");
         printf("\n2.exit");
         printf("\nEnter your choice:");
         scanf("%d",&ch);
         switch(ch)
         {
-            case 1:             printf("\n~Polynomial evaluation P(x,y,z)~\n");
+            case 1:             printf("\n~~~Polynomial evaluation P(x,y,z)~~\n");
                                     head = read_poly(head);
                                     printf("\nRepresentation of Polynomial for evaluation: \n");
                                     display(head);
@@ -596,10 +587,8 @@ void main()
 }
 
 
-
-
-
-#### 10th CODE
+ ##10--
+10. 
 
 Dictionary can be implemented using binary search tree.  A binary search tree is a binary tree such that each node stores a key of a dictionary. Key 'k' of a node is always greater than the keys present in its left sub tree. Similarly, key 'k' of a node is always lesser than the keys present in its right sub tree.
 Design, Develop and Implement a menu driven Program in C  to perform the  following operations using  Binary Search Tree (BST).
@@ -771,3 +760,15 @@ void search(NODEPTR tree,char key[])
     else
 	printf("\n Key %s is not found in the dictionary",key);
 }
+
+ 
+ 
+  
+
+
+
+
+
+
+
+ 
