@@ -1,3 +1,516 @@
+########1st Code#######
+#include <stdio.h>
+#include <stdlib.h>
+int main()
+{
+    int *arr;
+    int n, i, choice, pos, x, key, found = 0;
+    printf("Enter the number of elements in the array:");
+    scanf("%d", &n);
+    /* Dynamic memory allocation */
+    arr = (int *)malloc(n * sizeof(int));
+
+    printf("Enter the elements");
+
+    for (i = 0; i < n; i++)
+    {
+        scanf("%d", (arr + i));
+        printf("The elements of the array are :\n");
+    }
+    for (i = 0; i < n; i++)
+    {
+        printf("*(arr+%d)=%d\n", i, *(arr + i));
+    }
+    while (1)
+    {
+        printf("1-> INSERT  2-> DELETE   3-> SEARCH    4->EXIT\n");
+        printf("Give your choice:");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1: //  Insert an element
+            printf("Enter the element to be inserted:");
+            scanf("%d", &x);
+            printf("Enter the position to be inserted:");
+            scanf("%d", &pos);
+            n++;
+            for (i = n - 1; i >= pos; i--)
+                *(arr + i) = *(arr + i - 1);
+            *(arr + pos - 1) = x;
+
+            // print the updated array
+            printf("The elements of the array are :\n");
+            for (i = 0; i < n; i++)
+            {
+                printf("*(arr+%d)=%d\n", i, *(arr + i));
+            }
+            break;
+
+        case 2: // Delete an element
+            printf("Enter the position of the element to be deleted:");
+            scanf("%d", &pos);
+            for (i = pos; i <= n - 1; i++)
+                *(arr + i - 1) = *(arr + i);
+            n--;
+            // print the updated array
+            printf("The elements of the array are :\n");
+            for (i = 0; i < n; i++)
+            {
+                printf("*(arr+%d)=%d\n", i, *(arr + i));
+            }
+            break;
+        case 3: // Search an element
+            found = 0;
+            printf("Enter the  element to be searched:");
+            scanf("%d", &key);
+            for (i = 0; i <= n; i++)
+                if (*(arr + i) == key)
+                {
+                    found = 1;
+                    printf("\n Search key %d is found at position %d", i + 1);
+                }
+            if (found == 0)
+                printf("Search key %d is not found", key);
+            break;
+        case 4:
+            exit(1);
+        } /* switch*/
+    }     /*while*/
+} /*main()*/
+
+#####################2ND##################333
+
+#include <stdio.h>
+#include <stdlib.h>
+void main()
+{
+    int i, j, k, m, n, p, q, sum, choice;
+    int *A[3], *B[3], *C[3];
+    printf("enter the order of matrix 1\n");
+    scanf("%d%d", &m, &n);
+    printf("enter the order of matrix 2\n");
+    scanf("%d %d", &p, &q);
+    for (i = 0; i < m; i++)
+        A[i] = (int *)malloc(n * sizeof(int));
+    for (i = 0; i < p; i++)
+        B[i] = (int *)malloc(q * sizeof(int));
+    printf("enter elements of matrix 1\n");
+    for (i = 0; i < m; i++)
+        for (j = 0; j < n; j++)
+            scanf("%d", A[i] + j);
+
+    printf("enter elements of matrix 2\n");
+    for (i = 0; i < p; i++)
+        for (j = 0; j < q; j++)
+            scanf("%d", B[i] + j);
+    while (1)
+    {
+        printf("\n 1->Addition of matrix  2->Multiplication of matrix   3->Exit");
+        scanf("%d", &choice);
+
+        switch (choice)
+        {
+        case 1:
+            if (m != p || n != q)
+                printf("Matrix order mismatch - Addition not possible\n");
+            else
+            {
+                for (i = 0; i < m; i++)
+                    C[i] = (int *)malloc(n * sizeof(int));
+
+                for (i = 0; i < m; i++)
+                    for (j = 0; j < n; j++)
+                        *(C[i] + j) = *(A[i] + j) + *(B[i] + j);
+
+                printf("\n Result of matrix addition:\n");
+                for (i = 0; i < m; i++)
+                {
+                    for (j = 0; j < n; j++)
+                    {
+                        printf("\t%d", *C[i] + j);
+                    }
+                    printf("\n");
+                }
+            }
+            break;
+        case 2:
+            if (n != p)
+                printf("\nmatrices cannot be multiplied\n");
+            else
+            {
+                for (i = 0; i < p; i++)
+                {
+                    C[i] = (int *)malloc(q * sizeof(int));
+                }
+
+                for (i = 0; i < m; i++)
+                    for (j = 0; j < p; j++)
+                    {
+                        *(C[i] + j) = 0;
+                        for (k = 0; k < n; k++)
+                            *(C[i] + j) = *(C[i] + j) + *(A[i] + k) * *(B[k] + j);
+                    }
+                printf("\n Result of matrix Multiplicationn:\n");
+                for (i = 0; i < m; i++)
+                {
+                    for (j = 0; j < q; j++)
+                    {
+                        printf("\t%d", *C[i] + j);
+                    }
+                    printf("\n");
+                }
+            }
+            break;
+        case 3:
+            exit(1);
+        }
+    }
+}
+
+// 2. A mathematics teacher has 2 tables of integers and wants to perform basic operations on tables. Due to his busy schedule, he wants to use computer programs to perform this task. Help him to design and implement a C Program  to read two matrices  and perform the following operations. (Note : Use the concept of Array of pointers)
+// a.	Addition of two matrices
+// b.	Multiply two  matrices
+
+#################################3RD CODE#####################
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define SIZE 5
+
+struct BOOK
+{
+    int ISBN;
+    char title[20];
+    char author[20];
+    float price;
+};
+
+struct stack
+{
+    struct BOOK b[SIZE];
+    int top;
+};
+
+void push(struct stack *ps, struct BOOK b1);
+struct BOOK pop(struct stack *ps);
+void display(struct stack *ps);
+
+void main()
+{
+    struct stack s;
+    struct BOOK b1, r1;
+    int choice;
+    s.top = -1;
+    do
+    {
+        printf("\n 1:PUSH\t 2:POP\t 3:DISPLAY\t 4:QUIT");
+        printf("\n Enter your choice:");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+        case 1:
+            printf("Enter the ISBN, title, author and price of the book to push:");
+            scanf("%d %s %s %f, ", &b1.ISBN, b1.title, b1.author, &b1.price);
+            push(&s, b1);
+            break;
+        case 2:
+            r1 = pop(&s);
+            printf("The details of BOOK popped is :");
+            printf("\n ISBN =%d,  Title=%s, Author=%s, Price=%f", b1.ISBN, b1.title, b1.author, b1.price);
+            break;
+        case 3:
+            display(&s);
+            break;
+            printf("\n Stack empty");
+        case 4:
+            printf("\nQuitting operation stack\n");
+            break;
+        default:
+            printf("No such option\n");
+            break;
+        }
+    } while (choice != 4);
+}
+
+void push(struct stack *ps, struct BOOK b1)
+{
+    if (ps->top == SIZE - 1)
+        printf("Stack Overflow\n");
+    else
+    {
+        ++(ps->top);
+        ps->b[ps->top].ISBN = b1.ISBN;
+        strcpy(ps->b[ps->top].title, b1.title);
+        strcpy(ps->b[ps->top].author, b1.author);
+        ps->b[ps->top].price = b1.price;
+    }
+}
+
+struct BOOK pop(struct stack *ps)
+{
+    struct BOOK r;
+    if (ps->top == -1)
+    {
+        printf("\n Stack Underflow");
+        exit(1);
+    }
+    r.ISBN = ps->b[ps->top].ISBN;
+    strcpy(r.title, ps->b[ps->top].title);
+    strcpy(r.author, ps->b[ps->top].author);
+    r.price = ps->b[ps->top].price;
+    (ps->top)--;
+    return (r);
+}
+
+void display(struct stack *ps)
+{
+    int i;
+    if (ps->top == -1)
+        printf("\n Stack is empty");
+    else
+    {
+        printf("Stack contents are:\n");
+        for (i = ps->top; i >= 0; i--)
+        {
+            printf("\n ISBN= %d   Title=%s  Author=%s   Price=%f", ps->b[i].ISBN, ps->b[i].title, ps->b[i].author, ps->b[i].price);
+        }
+    }
+}
+
+/*Stack is a simple linear data structure used for storing data which follows the principle of Last In First Out. Assume that you are given the details of BOOK with members ISBN, Title, Author and Price.  Design an interactive C program to construct a stack data structure to store N BOOK items and write C functions to perform the following operations on it:
+a) PUSH-To add a new BOOK to the stack
+b) POP- To remove a BOOK  from the stack
+Also demonstrate Overflow and Underflow conditions on Stack and display the status of Stack.*/
+
+####################4th####################################
+#include <stdio.h>
+
+char stack[50];
+int top = -1;
+
+/* push() */
+void push(char ch)
+{
+    stack[++top] = ch;
+}
+
+/* pop() */
+char pop()
+{
+    if (top == -1)
+        return '\0'; // Empty stack
+    return (stack[top--]);
+}
+
+/* prcd() */
+int prcd(char ch)
+{
+    int p;
+    switch (ch)
+    {
+    case '$':
+    case '^':
+        p = 3;
+        break;
+    case '*':
+    case '/':
+        p = 2;
+        break;
+    case '+':
+    case '-':
+        p = 1;
+        break;
+    case '(':
+        p = -1;
+        break;
+    default:
+        p = 0;
+        break;
+    }
+    return p;
+}
+
+/* conversion() */
+void conversion(char infix[], char postfix[])
+{
+    int i = 0, p = 0;
+    char ch;
+    while ((ch = infix[i]) != '\0')
+    {
+        switch (ch)
+        {
+        case '(':
+            push(ch);
+            break;
+        case ')':
+            while (top != -1 && stack[top] != '(')
+                postfix[p++] = pop();
+            pop(); /* discard '(' */
+            break;
+        case '*':
+        case '/':
+        case '+':
+        case '-':
+        case '$':
+        case '^':
+            while (top != -1 && prcd(stack[top]) >= prcd(ch))
+                postfix[p++] = pop();
+            push(ch);
+            break;
+        default:
+            postfix[p++] = ch;
+            break;
+        }
+        i++;
+    }
+    while (top != -1)
+        postfix[p++] = pop();
+    postfix[p] = '\0';
+}
+
+int main()
+{
+    char infix[50], postfix[50];
+    printf("Enter a valid infix expression:\n");
+    scanf("%s", infix);
+    conversion(infix, postfix);
+    printf("Postfix expression: %s\n", postfix);
+    return 0;
+}
+#######################5th(1)############
+#include <stdio.h>
+#include <math.h>
+#include <ctype.h>
+
+float eval(char postfix[]);
+float oper(char symb, float op1, float op2);
+void push(float x);
+float pop();
+
+int main()
+{
+    char postfix[50];
+    int choice;
+    float res;
+    do
+    {
+        printf("Enter postfix expression: ");
+        scanf("%s", postfix);
+        res = eval(postfix);
+        printf("Result = %f\n", res);
+        printf("Do you want to enter another expression? (1/0): ");
+        scanf("%d", &choice);
+    } while (choice != 0);
+    return 0;
+}
+
+float eval(char postfix[])
+{
+    float op1, op2, value;
+    char ch;
+    int i = 0;
+    while ((ch = postfix[i]) != '\0')
+    {
+        if (isdigit(ch))
+            push(ch - '0');
+        else
+        {
+            op2 = pop();
+            op1 = pop();
+            value = oper(ch, op1, op2);
+            push(value);
+        }
+        i++;
+    }
+    return pop();
+}
+
+float oper(char symb, float op1, float op2)
+{
+    float result;
+    switch (symb)
+    {
+    case '$':
+    case '^':
+        result = pow(op1, op2);
+        break;
+    case '*':
+        result = op1 * op2;
+        break;
+    case '/':
+        if (op2 != 0)
+            result = op1 / op2;
+        else
+        {
+            printf("Error: Division by zero\n");
+            return 0; // Returning 0 for division by zero
+        }
+        break;
+    case '+':
+        result = op1 + op2;
+        break;
+    case '-':
+        result = op1 - op2;
+        break;
+    default:
+        printf("Error: Invalid operator\n");
+        return 0; // Returning 0 for invalid operator
+    }
+    return result;
+}
+
+float stack[50];
+int top = -1;
+
+void push(float x)
+{
+    stack[++top] = x;
+}
+
+float pop()
+{
+    return stack[top--];
+}
+
+/*Design, Develop and Implement a Program in C for the following Stack Applications
+a.	Evaluation of postfix expression with single digit operands and operators: +, -, *, /, %, ^ or $
+b.	Solving Tower of Hanoi problem with n disks  */
+#######################5th(2nd)#####################
+#include <stdio.h>
+
+void towers(int n, char source, char destination, char auxiliary);
+
+int main()
+{
+    int n;
+    printf("Enter the number of disks: ");
+    scanf("%d", &n);
+
+    if (n < 1)
+    {
+        printf("Invalid input. Number of disks must be positive.\n");
+        return 1; // Returning non-zero to indicate error
+    }
+
+    printf("Moves made:\n");
+    towers(n, 'A', 'C', 'B');
+
+    return 0; // Indicating successful execution
+}
+
+void towers(int n, char source, char destination, char auxiliary)
+{
+    if (n == 1)
+    {
+        printf("MOVE DISK 1 FROM PEG %c TO PEG %c\n", source, destination);
+        return;
+    }
+
+    towers(n - 1, source, auxiliary, destination);
+    printf("MOVE DISK %d FROM PEG %c TO PEG %c\n", n, source, destination);
+    towers(n - 1, auxiliary, destination, source);
+}
+
 #### 6th CODE
 /*A Call centre phone system has to hold the phone calls from customers and provide service based on the arrival time of the calls. Design and implement a C program to simulate this system using a Circular queue. Program should have options to add and remove the phone calls in appropriate order for their service. (Array Implementation of Queue with maximum size MAX). Include C functions to perform the following operations.
 a.	Add a call
