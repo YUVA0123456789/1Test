@@ -518,7 +518,7 @@ void towers(int n, char source, char destination, char auxiliary)
 a.	Add a call
 b.	Delete a call 
 c.	Display the current status of  calls 
-Demonstrate Overflow and Underflow conditions*/ .
+Demonstrate Overflow and Underflow conditions*/
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -804,9 +804,9 @@ main()
 
 
 ##8----
- You are assigned the task to design a browser history where a person can visit any page and go backward or forward in browser history in any number of steps. Suppose we have to go forward x steps, but we can go only y(where y<x) steps forward because of the last Node, then we return the last node. Similarly, we will return the first node while traveling back.
+/*You are assigned the task to design a browser history where a person can visit any page and go backward or forward in browser history in any number of steps. Suppose we have to go forward x steps, but we can go only y(where y<x) steps forward because of the last Node, then we return the last node. Similarly, we will return the first node while traveling back.
 
-Design and implement a menu driven Program in C to implement the above operations using Doubly Linked List.
+Design and implement a menu driven Program in C to implement the above operations using Doubly Linked List.*/
 
 
 #include<stdio.h>
@@ -1102,7 +1102,7 @@ void main()
 }
 
 
- ##10--
+ ##10-----
 10. 
 
 Dictionary can be implemented using binary search tree.  A binary search tree is a binary tree such that each node stores a key of a dictionary. Key 'k' of a node is always greater than the keys present in its left sub tree. Similarly, key 'k' of a node is always lesser than the keys present in its right sub tree.
