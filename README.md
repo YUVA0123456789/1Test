@@ -3,6 +3,7 @@
 #include <stdlib.h>
 int main()
 
+
 {
     int *arr;
     int n, i, choice, pos, x, key, found = 0;
